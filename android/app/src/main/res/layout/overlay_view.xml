@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#CC000000"
+    android:padding="8dp"
+    android:gravity="center_vertical"
+    android:layout_margin="10dp"
+    android:elevation="10dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <TextView
+        android:id="@+id/overlay_subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Focus"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:paddingEnd="8dp" />
+
+    <TextView
+        android:id="@+id/overlay_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="25:00"
+        android:textColor="#00FF00"
+        android:textSize="14sp"
+        android:paddingEnd="8dp" />
+
+    <Button
+        android:id="@+id/overlay_close"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:text="X"
+        android:textSize="10sp"
+        android:background="#00000000"
+        android:textColor="#FFFFFF"
+        android:padding="0dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp" />
+
+</LinearLayout>

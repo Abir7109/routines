@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ============================================ -->
+    <!-- REQUIRED PERMISSIONS FOR DISTRACTION BLOCKING -->
+    <!-- Add these to the existing permissions section -->
+    <!-- ============================================ -->
+
+    <!-- SYSTEM_ALERT_WINDOW - CRITICAL: Required to draw overlay over other apps -->
+    <!-- This allows the blocking screen to appear on top of social media apps -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- PACKAGE_USAGE_STATS - CRITICAL: Required to detect which app is currently active -->
+    <!-- This allows the service to know when user opens a blocked app -->
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+
+    <!-- FOREGROUND_SERVICE - Required to keep focus mode running in background -->
+    <!-- Ensures the blocking service stays active even when app is not visible -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <!-- FOREGROUND_SERVICE_SPECIAL_USE - Android 14+ special use declaration -->
+    <!-- Required for foreground services with special use cases -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
+    <!-- WAKE_LOCK - Keep device awake during focus mode -->
+    <!-- Prevents device from sleeping during focus session -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- RECEIVE_BOOT_COMPLETED - Auto-start on device boot (optional) -->
+    <!-- Allows service to restart after device reboot if needed -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- INTERNET - Already exists, ensuring it's present for web app -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- ============================================ -->
+    <!-- APPLICATION CONFIGURATION -->
+    <!-- ============================================ -->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="false">
+
+        <!-- ============================================ -->
+        <!-- MAIN ACTIVITY -->
+        <!-- ============================================ -->
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBarLaunch">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- ============================================ -->
+        <!-- DISTRACTION BLOCKING SERVICE -->
+        <!-- ============================================ -->
+
+        <!-- IMPORTANT: This service handles the blocking functionality -->
+        <!-- DO NOT modify this service configuration -->
+        <service
+            android:name=".FocusBlockingService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+
+            <!-- Special use declaration for Android 14+ -->
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="distraction_blocking" />
+
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_DESCRIPTION"
+                android:value="Blocks distracting apps during focus mode by displaying overlay over them" />
+        </service>
+
+        <!-- ============================================ -->
+        <!-- BOOT RECEIVER (Optional - for auto-start) -->
+        <!-- ============================================ -->
+
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+    <!-- ============================================ -->
+    <!-- QUERIES - For detecting other apps -->
+    <!-- ============================================ -->
+
+    <queries>
+        <!-- Allow querying package information for blocked apps -->
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
+</manifest>
+
+<!-- ============================================ -->
+<!-- IMPORTANT NOTES FOR CONVERSION AI -->
+<!-- ============================================ -->
+<!--
+1. DO NOT remove any existing permissions from the original manifest
+2. ADD these permissions to the existing permission declarations
+3. ADD the service declaration to the <application> section
+4. DO NOT modify any other parts of the manifest
+5. Keep the same application ID and package name
+6. Ensure all existing features continue to work
+
+PERMISSION REQUEST FLOW:
+1. When user starts focus mode, check for SYSTEM_ALERT_WINDOW permission
+2. If not granted, show permission request dialog
+3. When user starts focus mode, check for PACKAGE_USAGE_STATS permission
+4. If not granted, show permission request dialog
+5. Both permissions must be granted for blocking to work
+
+SERVICE LIFECYCLE:
+1. Service starts when user starts focus mode (Start button pressed)
+2. Service runs as foreground service with persistent notification
+3. Service monitors app switches every 500ms
+4. When blocked app detected, show overlay over that app
+5. Service stops when focus mode ends or user cancels
+6. Service notification shows "Focus Mode Active" with blocking status
+
+OVERLAY BEHAVIOR:
+1. Overlay appears over blocked apps during focus mode
+2. Overlay shows time remaining and motivational quote
+3. "Return to Focus" button returns to main app
+4. "End Focus" button stops focus mode and closes overlay
+5. Overlay disappears when focus mode ends
+-->

@@ -1,0 +1,125 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  settings          UserSettings?
+  focusSessions     FocusSession[]
+  scheduleItems     ScheduleItem[]
+  dailyStats        DailyStats[]
+  weeklyStreaks     WeeklyStreak[]
+}
+
+model UserSettings {
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  distractionBlocking  Boolean  @default(true)
+  ambientSoundsEnabled Boolean  @default(true)
+  notificationsEnabled Boolean  @default(true)
+  soundEnabled         Boolean  @default(true)
+  autoStartTimer       Boolean  @default(false)
+  syncDataEnabled      Boolean  @default(true)
+
+  defaultSessionDuration Int     @default(25) // minutes
+  defaultBreakDuration   Int     @default(5)  // minutes
+
+  preferredAmbientSound String?
+
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model FocusSession {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  subject     String
+  duration    Int      // in seconds
+  completed   Boolean  @default(false)
+  pausedAt    DateTime?
+
+  ambientSound String?
+
+  startedAt   DateTime @default(now())
+  completedAt DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+  @@index([startedAt])
+}
+
+model ScheduleItem {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  subject     String
+  tag         String?  // e.g., Science, Math, Arts
+  date        String   // YYYY-MM-DD
+  time        String   // HH:mm
+  duration    Int      // in minutes
+
+  completed   Boolean  @default(false)
+  order       Int      // for drag-and-drop ordering
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId, date])
+  @@index([userId, date, order])
+}
+
+model DailyStats {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  date            String   // YYYY-MM-DD
+  totalFocusTime  Int      @default(0) // in seconds
+  sessionsCount   Int      @default(0)
+  sessionsCompleted Int     @default(0)
+
+  // Subject-wise breakdown (JSON string for SQLite)
+  subjectBreakdown String? // JSON: { "Math": 3600, "Physics": 1800 }
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([userId, date])
+  @@index([userId])
+}
+
+model WeeklyStreak {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  weekStart       String   // YYYY-MM-DD (Monday)
+  streakDays      Int      @default(0) // consecutive days with focus
+  longestStreak   Int      @default(0) // longest streak in this week
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([userId, weekStart])
+  @@index([userId])
+}

@@ -1,0 +1,29 @@
+{
+  "appId": "com.studentfocus.app",
+  "appName": "ROUTINES",
+  "webDir": "out",
+  "server": {
+    "cleartext": true,
+    "allowNavigation": [
+      "*"
+    ],
+    "androidScheme": "https"
+  },
+  "android": {
+    "buildOptions": {
+      "signingType": "apksigner"
+    },
+    "webContentsDebuggingEnabled": false
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "launchMode": "always",
+      "launchAutoHide": true,
+      "backgroundColor": "#1E1E1E",
+      "splashFullScreen": true,
+      "splashImmersive": true,
+      "androidScaleType": "center_crop"
+    }
+  }
+}
