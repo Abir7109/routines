@@ -1,141 +1,214 @@
-# 🚀 Welcome to Z.ai Code Scaffold
+<div align="center">
 
-A modern, production-ready web application scaffold powered by cutting-edge technologies, designed to accelerate your development with [Z.ai](https://chat.z.ai)'s AI-powered coding assistance.
+<img src="public/logo.svg" alt="Routines Logo" width="120" height="120">
 
-## ✨ Technology Stack
+# Routines
 
-This scaffold provides a robust foundation built with:
+**A modern focus and productivity app for students and professionals**
 
-### 🎯 Core Framework
-- **⚡ Next.js 16** - The React framework for production with App Router
-- **📘 TypeScript 5** - Type-safe JavaScript for better developer experience
-- **🎨 Tailwind CSS 4** - Utility-first CSS framework for rapid UI development
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/Abir7109/routines/releases)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20iOS%20%7C%20Web-lightgrey.svg)](https://github.com/Abir7109/routines)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 
-### 🧩 UI Components & Styling
-- **🧩 shadcn/ui** - High-quality, accessible components built on Radix UI
-- **🎯 Lucide React** - Beautiful & consistent icon library
-- **🌈 Framer Motion** - Production-ready motion library for React
-- **🎨 Next Themes** - Perfect dark mode in 2 lines of code
+[Download APK](https://github.com/Abir7109/routines/releases/latest) · [Report Bug](https://github.com/Abir7109/routines/issues) · [Request Feature](https://github.com/Abir7109/routines/issues)
 
-### 📋 Forms & Validation
-- **🎣 React Hook Form** - Performant forms with easy validation
-- **✅ Zod** - TypeScript-first schema validation
-
-### 🔄 State Management & Data Fetching
-- **🐻 Zustand** - Simple, scalable state management
-- **🔄 TanStack Query** - Powerful data synchronization for React
-- **🌐 Fetch** - Promise-based HTTP request
-
-### 🗄️ Database & Backend
-- **🗄️ Prisma** - Next-generation TypeScript ORM
-- **🔐 NextAuth.js** - Complete open-source authentication solution
-
-### 🎨 Advanced UI Features
-- **📊 TanStack Table** - Headless UI for building tables and datagrids
-- **🖱️ DND Kit** - Modern drag and drop toolkit for React
-- **📊 Recharts** - Redefined chart library built with React and D3
-- **🖼️ Sharp** - High performance image processing
-
-### 🌍 Internationalization & Utilities
-- **🌍 Next Intl** - Internationalization library for Next.js
-- **📅 Date-fns** - Modern JavaScript date utility library
-- **🪝 ReactUse** - Collection of essential React hooks for modern development
-
-## 🎯 Why This Scaffold?
-
-- **🏎️ Fast Development** - Pre-configured tooling and best practices
-- **🎨 Beautiful UI** - Complete shadcn/ui component library with advanced interactions
-- **🔒 Type Safety** - Full TypeScript configuration with Zod validation
-- **📱 Responsive** - Mobile-first design principles with smooth animations
-- **🗄️ Database Ready** - Prisma ORM configured for rapid backend development
-- **🔐 Auth Included** - NextAuth.js for secure authentication flows
-- **📊 Data Visualization** - Charts, tables, and drag-and-drop functionality
-- **🌍 i18n Ready** - Multi-language support with Next Intl
-- **🚀 Production Ready** - Optimized build and deployment settings
-- **🤖 AI-Friendly** - Structured codebase perfect for AI assistance
-
-## 🚀 Quick Start
-
-```bash
-# Install dependencies
-bun install
-
-# Start development server
-bun run dev
-
-# Build for production
-bun run build
-
-# Start production server
-bun start
-```
-
-Open [http://localhost:3000](http://localhost:3000) to see your application running.
-
-## 🤖 Powered by Z.ai
-
-This scaffold is optimized for use with [Z.ai](https://chat.z.ai) - your AI assistant for:
-
-- **💻 Code Generation** - Generate components, pages, and features instantly
-- **🎨 UI Development** - Create beautiful interfaces with AI assistance  
-- **🔧 Bug Fixing** - Identify and resolve issues with intelligent suggestions
-- **📝 Documentation** - Auto-generate comprehensive documentation
-- **🚀 Optimization** - Performance improvements and best practices
-
-Ready to build something amazing? Start chatting with Z.ai at [chat.z.ai](https://chat.z.ai) and experience the future of AI-powered development!
-
-## 📁 Project Structure
-
-```
-src/
-├── app/                 # Next.js App Router pages
-├── components/          # Reusable React components
-│   └── ui/             # shadcn/ui components
-├── hooks/              # Custom React hooks
-└── lib/                # Utility functions and configurations
-```
-
-## 🎨 Available Features & Components
-
-This scaffold includes a comprehensive set of modern web development tools:
-
-### 🧩 UI Components (shadcn/ui)
-- **Layout**: Card, Separator, Aspect Ratio, Resizable Panels
-- **Forms**: Input, Textarea, Select, Checkbox, Radio Group, Switch
-- **Feedback**: Alert, Toast (Sonner), Progress, Skeleton
-- **Navigation**: Breadcrumb, Menubar, Navigation Menu, Pagination
-- **Overlay**: Dialog, Sheet, Popover, Tooltip, Hover Card
-- **Data Display**: Badge, Avatar, Calendar
-
-### 📊 Advanced Data Features
-- **Tables**: Powerful data tables with sorting, filtering, pagination (TanStack Table)
-- **Charts**: Beautiful visualizations with Recharts
-- **Forms**: Type-safe forms with React Hook Form + Zod validation
-
-### 🎨 Interactive Features
-- **Animations**: Smooth micro-interactions with Framer Motion
-- **Drag & Drop**: Modern drag-and-drop functionality with DND Kit
-- **Theme Switching**: Built-in dark/light mode support
-
-### 🔐 Backend Integration
-- **Authentication**: Ready-to-use auth flows with NextAuth.js
-- **Database**: Type-safe database operations with Prisma
-- **API Client**: HTTP requests with Fetch + TanStack Query
-- **State Management**: Simple and scalable with Zustand
-
-### 🌍 Production Features
-- **Internationalization**: Multi-language support with Next Intl
-- **Image Optimization**: Automatic image processing with Sharp
-- **Type Safety**: End-to-end TypeScript with Zod validation
-- **Essential Hooks**: 100+ useful React hooks with ReactUse for common patterns
-
-## 🤝 Get Started with Z.ai
-
-1. **Clone this scaffold** to jumpstart your project
-2. **Visit [chat.z.ai](https://chat.z.ai)** to access your AI coding assistant
-3. **Start building** with intelligent code generation and assistance
-4. **Deploy with confidence** using the production-ready setup
+</div>
 
 ---
 
-Built with ❤️ for the developer community. Supercharged by [Z.ai](https://chat.z.ai) 🚀
+## Screenshots
+
+<div align="center">
+<img src="assets/screenshots/home.png" alt="Home Screen" width="200">
+<img src="assets/screenshots/focus.png" alt="Focus Timer" width="200">
+<img src="assets/screenshots/schedule.png" alt="Schedule" width="200">
+<img src="assets/screenshots/analytics.png" alt="Analytics" width="200">
+</div>
+
+---
+
+## About
+
+**Routines** is a beautifully designed productivity application that helps you stay focused, manage your daily schedule, and track your progress. Built with modern technologies for a smooth, native-like experience on mobile devices.
+
+### Why Routines?
+
+- **Stay Focused** - Pomodoro-style timer with ambient sounds to help you concentrate
+- **Manage Time** - Organize your daily schedule with subjects and time blocks
+- **Track Progress** - Visualize your productivity with detailed analytics
+- **Minimal Distractions** - Clean, dark-themed interface designed for focus
+- **Cross-Platform** - Works on Android, iOS, and Web browsers
+
+---
+
+## Features
+
+### Focus Timer
+- Customizable Pomodoro timer (25/5, 50/10, or custom durations)
+- Ambient sounds: Rain, Ocean, Forest, White Noise
+- Pause/Resume functionality
+- Focus session tracking with subject labels
+- Background timer support on Android
+
+### Schedule Management
+- Create daily routines with subjects
+- Set duration and time for each session
+- Quick-start focus sessions from schedule
+- Visual calendar view
+
+### Analytics Dashboard
+- Weekly focus time statistics
+- Subject-wise time distribution
+- Productivity trends and insights
+- Session history tracking
+
+### Profile & Settings
+- User profile customization
+- Dark/Light theme support
+- Distraction blocking toggle
+- Auto-start timer option
+- Ambient sound preferences
+
+---
+
+## Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| **Framework** | Next.js 16 (App Router) |
+| **Language** | TypeScript 5 |
+| **Styling** | Tailwind CSS 4 |
+| **UI Components** | shadcn/ui + Radix UI |
+| **State Management** | Zustand |
+| **Database** | Prisma ORM (SQLite) |
+| **Mobile** | Capacitor (Android/iOS) |
+| **Animations** | Framer Motion |
+| **Charts** | Recharts |
+| **Icons** | Lucide React |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ or Bun
+- npm, yarn, or bun package manager
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Abir7109/routines.git
+
+# Navigate to project directory
+cd routines
+
+# Install dependencies
+npm install
+# or
+bun install
+
+# Set up the database
+npm run db:push
+
+# Start development server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the app.
+
+### Build for Production
+
+```bash
+# Build Next.js app
+npm run build
+
+# Build for Android
+npx cap sync android
+npx cap open android
+
+# Build for iOS
+npx cap sync ios
+npx cap open ios
+```
+
+---
+
+## Project Structure
+
+```
+routines/
+├── src/
+│   ├── app/                    # Next.js App Router pages
+│   │   ├── _api/              # API routes
+│   │   ├── globals.css        # Global styles
+│   │   ├── layout.tsx         # Root layout
+│   │   └── page.tsx           # Main app page
+│   ├── components/
+│   │   ├── screens/           # Main screen components
+│   │   ├── navigation/        # Navigation components
+│   │   ├── functional/        # Utility components
+│   │   └── ui/                # shadcn/ui components
+│   ├── hooks/                 # Custom React hooks
+│   └── lib/                   # Utilities and database
+├── android/                   # Android native project
+├── ios/                       # iOS native project
+├── public/                    # Static assets
+│   └── sounds/               # Ambient sound files
+├── prisma/                    # Database schema
+└── assets/                    # App icons and splash
+```
+
+---
+
+## Roadmap
+
+- [ ] Cloud sync for cross-device data
+- [ ] Widget support for quick timer access
+- [ ] Notification reminders for scheduled sessions
+- [ ] Custom ambient sound uploads
+- [ ] Focus streaks and achievements
+- [ ] Team/shared focus sessions
+- [ ] Apple Watch companion app
+
+---
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Acknowledgments
+
+- [shadcn/ui](https://ui.shadcn.com/) for beautiful UI components
+- [Lucide](https://lucide.dev/) for icons
+- [Pexels](https://www.pexels.com/) for ambient sounds inspiration
+
+---
+
+<div align="center">
+
+**Made with care by [Abir](https://github.com/Abir7109)**
+
+If you found this project helpful, please consider giving it a star!
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Abir7109/routines&type=Date)](https://star-history.com/#Abir7109/routines&Date)
+
+</div>
