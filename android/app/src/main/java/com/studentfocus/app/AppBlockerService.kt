@@ -70,7 +70,7 @@ class AppBlockerService : Service() {
                         handler.post(checkRunnable)
                     }
                 }
-            } else if (intent.action == "STOP_BLOCKING") {
+            } else if (intent.action == "STOP_BLOCKING" || intent.action == "STOP_SERVICE") {
                 isRunning = false
                 handler.removeCallbacks(checkRunnable)
                 hideOverlay()

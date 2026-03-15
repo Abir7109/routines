@@ -21,6 +21,7 @@ export interface FocusSession {
   startedAt: string;
   completedAt: string;
   ambientSound?: string;
+  status: 'completed' | 'not_finished'; // Track if session was completed or stopped early
 }
 
 export interface UserProfile {
@@ -108,28 +109,40 @@ export const clientDb = {
   },
 
   // --- Focus Sessions ---
-  recordFocusSession: async (data: { subject: string, duration: number, ambientSound?: string }): Promise<FocusSession> => {
+  recordFocusSession: async (data: { subject: string, duration: number, ambientSound?: string, status?: 'completed' | 'not_finished' }): Promise<FocusSession> => {
     await delay(100);
     const sessions: FocusSession[] = JSON.parse(getStorageItem(STORAGE_KEYS.FOCUS_SESSIONS));
+    const now = new Date();
     const newSession: FocusSession = {
       id: uuidv4(),
       userId: 'user_default',
       subject: data.subject,
       duration: data.duration,
-      startedAt: new Date(Date.now() - data.duration * 60000).toISOString(),
-      completedAt: new Date().toISOString(),
-      ambientSound: data.ambientSound
+      startedAt: new Date(now.getTime() - data.duration * 60000).toISOString(),
+      completedAt: now.toISOString(),
+      ambientSound: data.ambientSound,
+      status: data.status || 'completed' // Default to completed if not specified
     };
     sessions.push(newSession);
     setStorageItem(STORAGE_KEYS.FOCUS_SESSIONS, JSON.stringify(sessions));
 
-    // Update Profile
-    const profile = await clientDb.getProfile();
-    profile.totalSessions += 1;
-    profile.totalFocusTime += data.duration * 60; // seconds
-    setStorageItem(STORAGE_KEYS.PROFILE, JSON.stringify(profile));
+    // Update Profile only for completed sessions
+    if (data.status !== 'not_finished') {
+      const profile = await clientDb.getProfile();
+      profile.totalSessions += 1;
+      profile.totalFocusTime += data.duration * 60; // seconds
+      setStorageItem(STORAGE_KEYS.PROFILE, JSON.stringify(profile));
+    }
 
     return newSession;
+  },
+
+  // Get all focus sessions for history
+  getAllFocusSessions: async (): Promise<FocusSession[]> => {
+    await delay(100);
+    const sessions: FocusSession[] = JSON.parse(getStorageItem(STORAGE_KEYS.FOCUS_SESSIONS));
+    // Sort by completedAt descending (most recent first)
+    return sessions.sort((a, b) => new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime());
   },
 
   // --- Analytics ---

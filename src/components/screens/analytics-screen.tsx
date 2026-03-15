@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { clientDb } from "@/lib/client-db";
+import { clientDb, FocusSession } from "@/lib/client-db";
 import { GlassCard } from "@/components/ui/glass-card";
-import { Calendar, TrendingUp, Clock, Flame } from "lucide-react";
+import { Calendar, TrendingUp, Clock, Flame, CheckCircle, XCircle } from "lucide-react";
 import {
   LineChart,
   Line,
@@ -51,6 +51,9 @@ const AnalyticsScreen: React.FC<AnalyticsScreenProps> = ({ className }) => {
     longestStreak: 0,
     mostProductiveDay: "",
   });
+  
+  // Focus session history
+  const [sessionHistory, setSessionHistory] = React.useState<FocusSession[]>([]);
 
   React.useEffect(() => {
     loadAnalyticsData();
@@ -60,10 +63,12 @@ const AnalyticsScreen: React.FC<AnalyticsScreenProps> = ({ className }) => {
     try {
       setLoading(true);
       const data = await clientDb.getAnalytics();
+      const history = await clientDb.getAllFocusSessions();
 
       setWeeklyFocusData(data.weeklyFocusData || []);
       setSubjectDistribution(data.subjectDistribution || []);
       setMonthlyTrend(data.monthlyTrend || []);
+      setSessionHistory(history || []);
       setStats({
         totalFocusHours: data.totalFocusHours || 0,
         totalSessions: data.totalSessions || 0,
@@ -296,6 +301,49 @@ const AnalyticsScreen: React.FC<AnalyticsScreenProps> = ({ className }) => {
               </div>
             )}
           </div>
+        </GlassCard>
+      </section>
+
+      {/* Focus Session History */}
+      <section className="mb-8">
+        <h2 className="text-heading text-soft-white mb-4">Focus History</h2>
+        <GlassCard className="p-4">
+          {sessionHistory.length > 0 ? (
+            <div className="space-y-3 max-h-96 overflow-y-auto">
+              {sessionHistory.map((session) => (
+                <div 
+                  key={session.id} 
+                  className="flex items-center justify-between p-3 rounded-lg bg-charcoal-mid/30"
+                >
+                  <div className="flex items-center gap-3">
+                    {session.status === 'completed' ? (
+                      <CheckCircle className="w-5 h-5 text-muted-green" />
+                    ) : (
+                      <XCircle className="w-5 h-5 text-muted-red" />
+                    )}
+                    <div>
+                      <p className="text-body text-soft-white">{session.subject}</p>
+                      <p className="text-meta text-soft-gray">
+                        {new Date(session.completedAt).toLocaleDateString()} • {session.duration} min
+                      </p>
+                    </div>
+                  </div>
+                  <div className={`text-meta px-2 py-1 rounded ${
+                    session.status === 'completed' 
+                      ? 'bg-muted-green/20 text-muted-green' 
+                      : 'bg-muted-red/20 text-muted-red'
+                  }`}>
+                    {session.status === 'completed' ? 'Completed' : 'Not Finished'}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-8 text-soft-gray">
+              <p className="text-body">No focus sessions yet</p>
+              <p className="text-body-small mt-2">Complete a focus session to see your history</p>
+            </div>
+          )}
         </GlassCard>
       </section>
     </div>

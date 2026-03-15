@@ -36,8 +36,9 @@ class TimerOverlayService : Service() {
             } else if (action == "UPDATE_TIMER") {
                 val seconds = intent.getIntExtra("seconds", 0)
                 updateTimer(seconds)
-            } else if (action == "HIDE_OVERLAY") {
+            } else if (action == "HIDE_OVERLAY" || action == "STOP_SERVICE") {
                 hideOverlay()
+                stopSelf()
             }
         }
         return START_NOT_STICKY
